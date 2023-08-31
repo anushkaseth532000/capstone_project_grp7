@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head profile="http://gmpg.org/xfn/11">
+<title>IPO On boarding Portal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+	crossorigin="anonymous" />
+<link rel="stylesheet" href="../styles/layout.css" type="text/css" />
+<link rel="stylesheet" href="../styles/axislanding.css" type="text/css" />
+
+</head>
+<body id="top" style="background-color: white;">
+	<header class="nav-wrapper">
+
+	<div class="hamburger" id="hamburger">&#9776;</div>
+	<img th:src="@{/images/logo-white.png} "
+		style="max-width: 100%; height: 120px; width: 180px; margin-left: 8%; margin-top: 2%; z-index: 999;"></img>
+	<h3 class="navheading">IPO Onboarding Portal</h3>
+	<div class="second-nav">
+
+		<div class="dropdown">
+			<a class="dropdown-button" th:href="@{/merchant/search}">Search</a> <a
+				class="dropdown-button" th:href="@{/logout}">Sign Out</a>
+		</div>
+
+	</div>
+	</header>
+	<!-- ####################################################################################################### -->
+	<!-- ####################################################################################################### -->
+	<div class="wrapper row3">
+		<div class="rnd" style="width: 1200px;">
+			<div id="container" class="clear">
+				<!-- ####################################################################################################### -->
+
+				<h1 style="color: #97144d;">Search Merchant Details</h1>
+
+				<form action="#" th:action="@{/merchant/advsearch}"
+					th:object="${merchantDto}" method="post"
+					style="margin-left: 30%; margin-right: 30%;">
+
+					<table align="center" border="0px" width="100px">
+
+						<tr style="color: black; font-size: medium;">
+							<td class="p-5">VPA:</td>
+							<td><input type="text" th:field="*{vpa}" name="vpa"
+								size="35px" /></td>
+						</tr>
+
+						<tr>
+							<td>&nbsp;</td>
+							<td><input type="submit" value="Submit"
+								class="dropdown-button" /> <input type="reset" value="Reset"
+								class="dropdown-button" /></td>
+						</tr>
+
+					</table>
+
+					<div th:if="${#fields.hasErrors('global')}">
+						<p th:each="err : ${#fields.errors('global')}" th:text="${err}"
+							style="color: red;" />
+					</div>
+
+				</form>
+
+				<h1>View Merchant Details</h1>
+
+				<div th:switch="${merchants}" style="height: 300px; overflow: auto;">
+
+					<h2 th:case="null">No Records Found!</h2>
+
+					<div class="table-responsive" th:case="*">
+
+						<table class="table1">
+
+							<thead>
+
+								<tr>
+									<th>Sno</th>
+									<th>Name</th>
+									<th>Marketing Name</th>
+									<th>Address</th>
+									<th>City</th>
+									<th>State</th>
+									<th>Pincode</th>
+									<th>Mobile No</th>
+									<th>Landline No</th>
+									<th>Director</th>
+									<th>Category</th>
+									<th>MCC</th>
+									<th>MCC Desc</th>
+									<th>Type Of Integration</th>
+									<th>VPA</th>
+									<th>GST Number</th>
+									<th id="click-me">Additional Info</th>
+									<th class="toggleDisplay">PAN</th>
+									<th class="toggleDisplay">Merchant Official Id</th>
+									<th class="toggleDisplay">Merchant Website</th>
+									<th class="toggleDisplay">Bank Name</th>
+									<th class="toggleDisplay">IFSC Code</th>
+									<th class="toggleDisplay">Nodal Account No</th>
+									<th class="toggleDisplay">Pool Account No</th>
+									<th class="toggleDisplay">Pool IFSC Code</th>
+									<th class="toggleDisplay">SYM</th>
+									<th class="toggleDisplay">Batch Code</th>
+									<th class="toggleDisplay">Status</th>
+									<th class="toggleDisplay">Recorded Date</th>
+
+								</tr>
+
+							</thead>
+
+
+
+							<tbody>
+
+								<tr th:each="m, mstatus : ${merchants}">
+
+									<td th:text="${mstatus.count}"></td>
+									<td th:text="${m.name}"></td>
+									<td th:text="${m.marketing_name}"></td>
+									<td th:text="${m.address}"></td>
+									<td th:text="${m.city}"></td>
+									<td th:text="${m.state}"></td>
+									<td th:text="${m.pincode}"></td>
+									<td th:text="${m.mobile_no}"></td>
+									<td th:text="${m.landline_no}"></td>
+									<td th:text="${m.director}"></td>
+									<td th:text="${m.category}"></td>
+									<td th:text="${m.mcc}"></td>
+									<td th:text="${m.mcc_desc}"></td>
+									<td th:text="${m.type_of_integration}"></td>
+									<td th:text="${m.vpa}"></td>
+									<td th:text="${m.gst_mumber}"></td>
+									<td class="toggleDisplay" th:text="${m.pan}"></td>
+									<td class="toggleDisplay" th:text="${m.merchant_official_id}"></td>
+									<td class="toggleDisplay" th:text="${m.merchant_website}"></td>
+									<td class="toggleDisplay" th:text="${m.bank_name}"></td>
+									<td class="toggleDisplay" th:text="${m.ifsc_code}"></td>
+									<td class="toggleDisplay" th:text="${m.nodal_account_no}"></td>
+									<td class="toggleDisplay" th:text="${m.pool_account_no}"></td>
+									<td class="toggleDisplay" th:text="${m.pool_ifsc_code}"></td>
+									<td class="toggleDisplay" th:text="${m.sym}"></td>
+									<td class="toggleDisplay" th:text="${m.uploadId}"></td>
+									<td class="toggleDisplay" th:text="${m.status}"></td>
+									<td class="toggleDisplay" th:text="${m.recordedDate}"></td>
+
+								</tr>
+
+								<tr th:if="${#lists.isEmpty(merchants)}">
+
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td style="color: red;">No Record Found!</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+
+								</tr>
+
+							</tbody>
+
+						</table>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<script>
+		$("#click-me").click(function() {
+			$(".table1 .toggleDisplay").toggleClass("in");
+		});
+	</script>
+</body>
+
+</html>

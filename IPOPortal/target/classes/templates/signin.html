@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head profile="http://gmpg.org/xfn/11">
+<title>IPO On boarding Portal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+	crossorigin="anonymous" />
+<link rel="stylesheet" href="../styles/layout.css" type="text/css" />
+<link rel="stylesheet" href="../styles/axislanding.css" type="text/css" />
+</head>
+<body id="top" style="background-color: white;">
+	<header class="nav-wrapper">
+
+	<div class="hamburger" id="hamburger">&#9776;</div>
+	<img th:src="@{/images/logo-white.png} "
+		style="max-width: 100%; height: 120px; width: 180px; margin-left: 8%; margin-top: 2%; z-index: 999;"></img>
+	<h3 class="navheading">IPO Onboarding Portal</h3>
+	<div class="second-nav">
+
+		<div class="dropdown">
+			<a class="dropdown-button" th:href="@{/user/view}">View User</a> 
+			<a class="dropdown-button" th:href="@{/user/signin}">Employee Registration</a> 
+			<a class="dropdown-button" th:href="@{/merchant/updateMerchantData}">Merchant Update</a> 
+			<a class="dropdown-button" th:href="@{/merchant/viewUpdated}">View Request</a>  
+			<!--<a class="dropdown-button" href="#">Merchant Update</a> 
+			<a class="dropdown-button" href="#">View Request</a> -->
+			<a class="dropdown-button" th:href="@{/logout}">Sign Out</a> 
+		</div>
+
+	</div>
+	</header>
+<!-- ####################################################################################################### -->
+<!-- ####################################################################################################### -->
+<div class="wrapper row3">
+  <div class="rnd" style="width:600px;">
+    <div id="container" class="clear">
+      <!-- ####################################################################################################### -->
+      <h1 style="color: #97144d;font-size: large;font-style: var();">Employee Registration Form</h1>
+       
+      <form action="#" th:action="@{/user/add}" th:object="${userDto}" method="post">
+          
+          <table align="center" border="0px" width="50px">
+              
+              <tr style="color:#97144d; font-size: medium;">
+                  
+                  <td class="p-5">Name:</td>
+                  
+                  <td><input type="text" th:field="*{Name}" name="name" size="20px"/></td>
+              </tr>
+              
+              <tr style="color:#97144d; font-size: medium;">
+                  <td class="p-5">Phone No:</td><td><input type="text" th:field="*{userPhoneno}" name="userPhoneno" maxlength="10" size="53px"/></td>
+              </tr>
+              
+              <tr style="color:#97144d; font-size: medium;">
+                  <td class="p-5">Email Id:</td><td><input type="text" th:field="*{userEmailId}" name="userEmailId" size="53px"/></td>
+              </tr>
+              
+              <tr style="color:#97144d; font-size: medium;">
+                  <td class="p-5">Address:</td><td><textarea cols="52" rows="3" th:field="*{userAddress}" name="userAddress"></textarea></td>
+              </tr>   
+              
+              <tr style="color:#97144d; font-size: medium;">
+                  <td class="p-5">Zipcode:</td><td><input type="text" th:field="*{userLocation}" name="userLocation"  maxlength="6" size="53px"/></td>
+              </tr>
+                  
+              <tr style="color:#97144d; font-size: medium;">
+                            
+              	  <td class="p-5">Role:</td>
+              
+	              <td>
+	                  <select th:field="*{categoryId}" name="categoryId" style="width: 340px;">  
+	                  	 <option value="0">-Select-</option>                         
+	                     <option th:each="m : ${categorys}" th:value="${m.categoryId}" th:text="${m.categoryName}"></option>
+	                  </select>                      
+	              </td>
+                 
+              </tr>
+              
+              <tr style="color:#97144d; font-size: medium;">
+                  <td class="p-5">User Name:</td><td><input type="text" th:field="*{userName}" name="userName" size="53px"/></td>
+              </tr>
+                        
+              <tr style="color:#97144d; font-size: medium;">
+                  <td class="p-5">Password:</td><td><input type="password" th:field="*{userPassword}" name="userPassword" size="53px"/></td>
+              </tr>
+              
+              <tr>
+                  <td>&nbsp;</td><td class="btn btn-light">
+                  
+							<button type="submit" class="dropdown-button">Submit</button>
+							<button type="reset" class="dropdown-button">Reset</button></td>
+              </tr>
+              
+          </table>
+          
+           <div th:if="${#fields.hasErrors('global')}">
+			    <p th:each="err : ${#fields.errors('global')}" th:text="${err}" style="color:red;" />
+		   </div>
+          
+      </form>
+                  
+    </div>
+    
+  </div>
+    
+ </div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+		crossorigin="anonymous"></script>
+    
+</body>
+    
+</html>
